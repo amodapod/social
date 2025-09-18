@@ -1,27 +1,41 @@
+// lib/inngest/client.ts
 import { Inngest } from 'inngest';
-import type { InngestClient } from '@/types/inngest';
+
+// Define the event types for type safety
+type Events = {
+  'onboarding/check': {
+    data: { userId: string };
+  };
+  // Add other event types as needed
+};
+
+// Create a type-safe client
+type InngestClient = Inngest;
 
 // Create a single instance of the Inngest client for server-side usage
-export const inngest: InngestClient = new Inngest({
+const client = new Inngest({
   id: 'youtube-seo-app',
-  eventKey: process.env.INNGEST_EVENT_KEY,
-  // Set the base URL for the Inngest API
-  fetch: (input, init) => {
-    // Use the local dev server URL when in development
-    const baseUrl = process.env.NODE_ENV === 'development' 
-      ? 'http://localhost:3000' 
-      : process.env.NEXT_PUBLIC_SITE_URL;
-      
-    const url = typeof input === 'string' 
-      ? new URL(input, baseUrl)
-      : input;
-    
-    return fetch(url, {
-      ...init,
-      headers: {
-        ...init?.headers,
-        'Content-Type': 'application/json',
-      },
-    });
-  },
+  // Remove the custom fetch implementation as it might be causing issues
+  // The Inngest client will handle the fetch implementation
 });
+
+export const inngest: InngestClient = client;
+
+// Helper function to safely send events
+export async function sendEvent<T extends keyof Events>(
+  eventName: T,
+  data: Events[T]['data']
+) {
+  try {
+    await client.send({
+      name: eventName as string,
+      data,
+    });
+  } catch (error) {
+    console.error(`Error sending ${eventName} event:`, error);
+    throw error;
+  }
+}
+
+// Export the client as default for backward compatibility
+export default client;

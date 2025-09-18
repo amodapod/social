@@ -1,4 +1,5 @@
 import { Sidebar } from "@/components/ui/sidebar"
+import { OnboardingCheckWrapper } from "@/components/onboarding/OnboardingCheckWrapper"
 
 export default function DashboardLayout({
   children,
@@ -15,6 +16,7 @@ export default function DashboardLayout({
           </div>
         </header>
         <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
+          <OnboardingCheckWrapper />
           {children}
         </main>
       </div>

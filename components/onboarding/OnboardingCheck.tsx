@@ -4,7 +4,7 @@
 import { JSX, useEffect } from 'react';
 import { useAuth } from '@/contexts/auth-context';
 import { useOnboarding } from '@/contexts/onboarding-context';
-import { inngest } from '@/lib/inngest/client';
+import { sendEvent } from '@/lib/inngest/client';
 
 interface OnboardingEvent {
   data: {
@@ -22,10 +22,7 @@ export function OnboardingCheck(): JSX.Element | null {
     // Start the onboarding check
     const checkOnboarding = async (): Promise<void> => {
       try {
-        await inngest.send({
-          name: 'onboarding/check',
-          data: { userId: user.id },
-        });
+        await sendEvent('onboarding/check', { userId: user.id });
       } catch (error) {
         console.error('Error sending onboarding check event:', error);
       }

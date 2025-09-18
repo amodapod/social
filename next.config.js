@@ -14,6 +14,8 @@ const nextConfig = {
   publicRuntimeConfig: {
     supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL,
   },
+  // Transpile Recharts for compatibility
+  transpilePackages: ['recharts'],
   webpack: (config, { isServer, webpack }) => {
     // Handle node: protocol for Node.js built-in modules
     if (!isServer) {

@@ -1,21 +1,9 @@
 "use client"
 
+import dynamic from 'next/dynamic';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { 
-  LineChart, 
-  Line, 
-  XAxis, 
-  YAxis, 
-  CartesianGrid, 
-  Tooltip, 
-  ResponsiveContainer,
-  AreaChart,
-  Area,
-  BarChart,
-  Bar
-} from "recharts"
 import { 
   TrendingUp, 
   Users, 
@@ -26,6 +14,17 @@ import {
   Share2,
   MessageCircle
 } from "lucide-react"
+
+// Dynamically import chart components with SSR disabled
+const PerformanceChart = dynamic(
+  () => import('@/components/analytics/PerformanceChart'),
+  { ssr: false }
+);
+
+const AudienceRetentionChart = dynamic(
+  () => import('@/components/analytics/AudienceRetentionChart'),
+  { ssr: false }
+);
 
 const performanceData = [
   { date: "2024-01", views: 45000, subscribers: 1200, engagement: 8.2, revenue: 850 },
@@ -138,40 +137,7 @@ export default function AnalyticsPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <ResponsiveContainer width="100%" height={400}>
-            <AreaChart data={performanceData}>
-              <defs>
-                <linearGradient id="colorViews" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#8B5CF6" stopOpacity={0.8}/>
-                  <stop offset="95%" stopColor="#8B5CF6" stopOpacity={0}/>
-                </linearGradient>
-                <linearGradient id="colorSubscribers" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#3B82F6" stopOpacity={0.8}/>
-                  <stop offset="95%" stopColor="#3B82F6" stopOpacity={0}/>
-                </linearGradient>
-              </defs>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="date" />
-              <YAxis />
-              <Tooltip />
-              <Area 
-                type="monotone" 
-                dataKey="views" 
-                stackId="1"
-                stroke="#8B5CF6" 
-                fillOpacity={1} 
-                fill="url(#colorViews)" 
-              />
-              <Area 
-                type="monotone" 
-                dataKey="subscribers" 
-                stackId="2"
-                stroke="#3B82F6" 
-                fillOpacity={1} 
-                fill="url(#colorSubscribers)" 
-              />
-            </AreaChart>
-          </ResponsiveContainer>
+          <PerformanceChart />
         </CardContent>
       </Card>
 
@@ -185,21 +151,7 @@ export default function AnalyticsPage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={audienceRetention}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="time" />
-                <YAxis />
-                <Tooltip />
-                <Line 
-                  type="monotone" 
-                  dataKey="retention" 
-                  stroke="#10B981" 
-                  strokeWidth={3}
-                  dot={false}
-                />
-              </LineChart>
-            </ResponsiveContainer>
+            <AudienceRetentionChart />
           </CardContent>
         </Card>
 
