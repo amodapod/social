@@ -4,7 +4,7 @@ import { AuthProvider } from '@/contexts/auth-context';
 import { OnboardingProvider } from '@/contexts/onboarding-context';
 import { UserProvider } from '@/contexts/user-context';
 import { OnboardingCheck } from '@/components/onboarding/OnboardingCheck';
-import { InngestProvider } from 'inngest/next';
+import { Inngest } from 'inngest';
 import { inngest } from '@/lib/inngest/client';
 import './globals.css';
 
@@ -18,16 +18,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <InngestProvider client={inngest}>
-          <AuthProvider>
-            <UserProvider>
-              <OnboardingProvider>
-                <OnboardingCheck />
-                {children}
-              </OnboardingProvider>
-            </UserProvider>
-          </AuthProvider>
-        </InngestProvider>
+        <AuthProvider>
+          <UserProvider>
+            <OnboardingProvider>
+              <OnboardingCheck />
+              {children}
+            </OnboardingProvider>
+          </UserProvider>
+        </AuthProvider>
       </body>
     </html>
   );

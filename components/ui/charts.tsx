@@ -1,6 +1,6 @@
 'use client'
 
-import { Line } from 'react-chartjs-2'
+import { Line, Bar, Pie } from 'react-chartjs-2'
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, BarElement, ArcElement, Title, Tooltip, Legend } from 'chart.js'
 
 // Register ChartJS components
@@ -101,7 +101,7 @@ export function LineChart() {
 export function PieChart() {
   return (
     <div className="relative w-full h-full">
-      <Line
+      <Pie
         options={{
           ...chartOptions,
           plugins: {
@@ -113,7 +113,6 @@ export function PieChart() {
           },
         }}
         data={pieData}
-        type="pie"
       />
     </div>
   )
@@ -122,10 +121,9 @@ export function PieChart() {
 export function BarChart() {
   return (
     <div className="relative w-full h-full">
-      <Line
+      <Bar
         options={chartOptions}
         data={barData}
-        type="bar"
       />
     </div>
   )

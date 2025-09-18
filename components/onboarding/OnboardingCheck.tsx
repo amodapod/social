@@ -1,7 +1,7 @@
 // components/onboarding/OnboardingCheck.tsx
 'use client';
 
-import { useEffect } from 'react';
+import { JSX, useEffect } from 'react';
 import { useAuth } from '@/contexts/auth-context';
 import { useOnboarding } from '@/contexts/onboarding-context';
 import { inngest } from '@/lib/inngest/client';

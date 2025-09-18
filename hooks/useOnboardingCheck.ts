@@ -6,7 +6,7 @@ import { useUser } from '@/contexts/user-context';
 import { useOnboarding } from '@/contexts/onboarding-context';
 
 export function useOnboardingCheck() {
-  const { user, loading: userLoading } = useUser();
+  const { user, isLoading: userLoading } = useUser();
   const { startOnboarding } = useOnboarding();
 
   useEffect(() => {

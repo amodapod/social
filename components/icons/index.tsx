@@ -1,4 +1,4 @@
-import { LucideProps } from 'lucide-react';
+import { LucideProps, ArrowRight, Check, Loader2 } from 'lucide-react';
 
 export function YoutubeIcon(props: LucideProps) {
   return (
@@ -62,9 +62,28 @@ export function FacebookIcon(props: LucideProps) {
   );
 }
 
+export function TiktokIcon(props: LucideProps) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+    >
+      <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.26 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.49-.64-.13-1.35.06-1.85.49-.52.49-.8 1.22-.7 1.94.17 1.08 1.08 1.87 2.2 1.89 1.3.02 2.4-1.06 2.43-2.39.03-1.14-.67-2.19-1.7-2.6.21-.11.42-.21.62-.32 1.2-.5 2.4-1.06 3.54-1.71.02-.01.04-.03.06-.04.11-.07.16-.18.12-.3-.12-.4-.2-.8-.26-1.21-.12-.85-.1-6.1-.1-6.1z" />
+    </svg>
+  );
+}
+
 export const Icons = {
   youtube: YoutubeIcon,
   twitter: TwitterIcon,
   instagram: InstagramIcon,
   facebook: FacebookIcon,
+  tiktok: TiktokIcon,
+  arrowRight: ArrowRight,
+  check: Check,
+  spinner: Loader2,
 };

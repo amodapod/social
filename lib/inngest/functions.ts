@@ -1,4 +1,4 @@
-import { inngest } from './client';
+import { inngest } from '@/lib/inngest/client.js';
 import { createClient } from '@supabase/supabase-js';
 
 export const onboardingCheck = inngest.createFunction(
